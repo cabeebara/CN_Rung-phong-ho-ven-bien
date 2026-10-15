@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COASTAL ECOFARM</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<aside id="side"><h1>COASTAL<br>ECOFARM</h1>
+<nav><button data-tab="map" class="on">Sơ đồ khu vực</button><button data-tab="forest">Theo dõi cây</button><button data-tab="shrimp">Theo dõi tôm</button><button data-tab="docs">Quy trình &amp; tài liệu</button></nav></aside>
+<main><header><span class="sim">DỮ LIỆU MÔ PHỎNG</span><span id="clock"></span>
+<div><button id="pause">Tạm dừng</button><button id="reset">Đặt lại dữ liệu</button></div></header>
+<section id="map" class="tab on"><div id="kpi-map" class="kpis"></div><div class="row"><div class="card"><svg id="svg" viewBox="0 0 800 340"></svg>
+<p class="legend"><i style="background:#477653"></i>Dải rừng <i style="background:#8ec9e8"></i>Kênh nuôi tôm <i style="background:#c9b27a"></i>Lối đi <b>→</b> Dòng nước</p>
+<button id="back">Quay lại tổng quan</button></div><div id="detail" class="card">Chọn một dải rừng hoặc kênh trên sơ đồ để xem chi tiết.</div></div>
+<div id="alerts" class="card"></div></section>
+<section id="forest" class="tab"><div id="kpi-forest" class="kpis"></div><div id="forest-list" class="grid"></div></section>
+<section id="shrimp" class="tab"><div id="kpi-shrimp" class="kpis"></div><div id="shrimp-list" class="grid"></div></section>
+<section id="docs" class="tab"><div id="docs-body"></div></section>
+<footer>Dữ liệu mô phỏng, không chứng minh lợi ích sinh thái hay hiệu quả kinh tế. Việc nuôi trồng thủy sản hoặc đào kênh trong rừng phòng hộ ven biển không mặc nhiên được phép: cần kiểm tra phân loại rừng, quy hoạch sử dụng đất, giấy phép và quy định pháp luật Việt Nam hiện hành.</footer></main>
+<script src="script.js"></script></body></html>
