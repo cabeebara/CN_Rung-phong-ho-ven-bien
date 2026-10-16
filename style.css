@@ -28,3 +28,5 @@ footer{font-size:12px;margin-top:16px;padding:10px;background:var(--l);border-ra
 .step em{display:block;font-size:.85em;color:var(--warn);font-style:normal;font-weight:600}.step p{margin:2px 0}
 .cycle{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.cycle span{background:var(--l);padding:4px 10px;border-radius:14px;font-size:.9em}.cycle i{font-style:normal;color:var(--m)}
 #docs-body h2{margin:0 0 8px;font-size:20px}
+
+.docsw button{background:#fff!important;color:var(--d)!important;border:2px solid var(--m)!important}.docsw button.on{background:var(--m)!important;color:#fff!important}
