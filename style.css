@@ -22,3 +22,9 @@ footer{font-size:12px;margin-top:16px;padding:10px;background:var(--l);border-ra
 .bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}.bar button,#readP2{background:var(--m);color:#fff;border:0;padding:6px 12px;border-radius:6px;font:600 13px Montserrat,sans-serif;cursor:pointer}
 .bar a{color:var(--m);font-weight:600;font-size:13px}.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-bottom:8px}.toc a{color:var(--m)}
 .note{background:var(--l);padding:8px;border-radius:6px;font-size:13px}.scroll{overflow-x:auto}#rbody ul{line-height:1.6}[hidden]{display:none!important}
+
+.steps{border-left:3px solid var(--m);margin:10px 0 10px 14px;padding-left:18px}.step{display:flex;gap:12px;margin-bottom:14px;position:relative}
+.num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--m);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;margin-left:-34px;border:3px solid var(--bg)}
+.step em{display:block;font-size:.85em;color:var(--warn);font-style:normal;font-weight:600}.step p{margin:2px 0}
+.cycle{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.cycle span{background:var(--l);padding:4px 10px;border-radius:14px;font-size:.9em}.cycle i{font-style:normal;color:var(--m)}
+#docs-body h2{margin:0 0 8px;font-size:20px}
