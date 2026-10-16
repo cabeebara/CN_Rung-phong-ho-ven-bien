@@ -92,7 +92,36 @@ function buildMap(){let x=20,h='';const W=[110,50];
 // ===== Tab 3 (basic) =====
 const timeline=[['Khảo sát hiện trạng','2026-10-05'],['Lập kế hoạch & xin phép','2026-10-20'],['Chuẩn bị','2026-11-15'],['Thả giống','2026-12-10'],['Theo dõi & đánh giá tăng trưởng','2027-01-10'],['Thu hoạch','2027-04-10'],['Đánh giá kinh tế & sinh thái','2027-05-10']];
 const procs=[['Đánh giá rừng','Mục đích: ghi nhận hiện trạng. Dụng cụ: thước dây, GPS, phiếu ghi. Bước: lập ô mẫu, đếm cây, đánh giá sức khỏe. An toàn: mang ủng, tránh thủy triều lên.'],['Chất lượng nước','Mục đích: kiểm soát môi trường ao. Dụng cụ: máy đo pH, DO, độ mặn. Bước: đo cùng giờ mỗi ngày, ghi sổ, so với ngưỡng. An toàn: rửa tay sau khi lấy mẫu.'],['Cho ăn & sức khỏe tôm','Mục đích: tránh dư thừa thức ăn. Bước: cho ăn theo giai đoạn, kiểm tra nhá (sàng ăn), quan sát hoạt động tôm.'],['Xử lý nước bất thường','Khi DO hoặc pH ngoài ngưỡng: kiểm tra lại, ngừng cho ăn nếu cần, hỏi cán bộ kỹ thuật địa phương.']];
-function buildDocs(){$('#docs-body').innerHTML=`<div class="card"><h3>Tiến độ dự án (mẫu)</h3><table>${timeline.map(([n,d],i)=>`<tr><td>${i+1}</td><td>${n}</td><td>${fmt(d)}</td><td>${i?'Phụ thuộc bước '+i:'—'}</td></tr>`).join('')}</table></div><h3>Quy trình kỹ thuật (mẫu, cần chuyên gia xác nhận)</h3>${procs.map(([t,b])=>`<details><summary>${t}</summary><p>${b}</p></details>`).join('')}<div class="card"><h3>Thư viện tài liệu</h3><p>Chưa có tài liệu nào được xác minh. Hãy thêm nguồn thật vào <code>referenceDocuments</code> trong script.js.</p></div>`}
+// ===== Tài liệu P2 (nội dung lấy từ file .docx của nhóm) =====
+const tb=(h,r)=>`<div class="scroll"><table><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.map(x=>`<tr>${x.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+const refDoc=[
+['1. Chuẩn đầu ra',ul(['<b>Rừng:</b> đước sống ≥ 85%, che phủ ~60%, phòng hộ tốt','<b>Tôm:</b> giống sạch bệnh, cỡ 25–40 con/kg, không tồn dư kháng sinh','<b>Kinh tế:</b> có lãi ổn định từ tôm + lâm sản','<b>Môi trường:</b> nước đạt chuẩn, chu trình dinh dưỡng khép kín','<b>Chứng nhận:</b> hướng tới VietGAP (TCVN 11892-1), nâng lên ASC / Naturland'])],
+['2. Điều kiện áp dụng',ul(['Vùng ven biển, ngập triều; đất bùn/sét pha','Nước lợ, độ mặn 10–25‰, không ô nhiễm','Đất/rừng hợp pháp; rừng ~60–70%, mặt nước ~30–40%'])],
+['3. Chọn giống',tb(['Đối tượng','Lựa chọn'],[['Đước','Đước đôi; trụ mầm chín, 30–45 cm, cây mẹ khỏe, nguồn gốc rõ'],['Tôm sú','PL12–PL15, PCR âm tính, cơ sở giống có phép; thả 2–5 con/m²']])],
+['4. Quy trình 6 giai đoạn',tb(['Giai đoạn','Thời gian','Việc chính'],[['1. Thiết kế & làm công trình','T1–5','Khảo sát, đào mương bao + mương xẻ lòng rừng, lắp cống cấp/xả'],['2. Trồng đước','Đầu mùa mưa','Cắm trụ mầm ~1×1 m, trồng dặm, chăm sóc năm 1–3'],['3. Xử lí mương & nước','2–4 tuần trước thả','Nạo vét, bón vôi, lọc nước, gây màu nước'],['4. Thả & nuôi tôm','4–5 tháng/vụ','Thả giống, lấy nước theo triều, thức ăn tự nhiên là chính, ghi nhật kí'],['5. Thu hoạch','Cuối vụ','Thu tỉa/thu toàn bộ, bảo quản lạnh, ghi sản lượng'],['6. Tỉa thưa & khai thác rừng','Năm 6–12 tỉa thưa; 15–25 năm khai thác','Giữ che phủ ~60%, thu cọc/củi, trồng lại']])+'<p><b>Chu trình sinh thái:</b> lá đước → mùn bã → vi sinh vật → phiêu sinh/giáp xác → tôm → phân tôm → dinh dưỡng cho đước.</p>'],
+['5. Nghiệm thu','<p><b>Cách làm:</b> nghiệm thu theo giai đoạn, đo bằng ô tiêu chuẩn/mẫu đại diện, có biên bản và hồ sơ truy xuất.</p>'+tb(['Nhóm','Tiêu chí','Ngưỡng đạt'],[['Rừng','Tỉ lệ sống, sinh trưởng, che phủ','≥ 85%; đạt theo tuổi; ~60%'],['Nước','pH, độ mặn, DO','7,5–8,5; 10–25‰; ≥ 4 mg/L'],['Tôm','Tỉ lệ sống, sản lượng, cỡ','~50–70%; 200–500 kg/ha/vụ; 25–40 con/kg'],['An toàn','Tồn dư kháng sinh','Không phát hiện'],['Kinh tế','Lợi nhuận, ROI','Dương, đạt mục tiêu nhóm'],['Môi trường','Xả thải, đa dạng sinh học','Không xả nước bẩn; có sinh vật quay lại']])],
+['6. Tiêu chuẩn đối chiếu',ul(['<b>Lâm nghiệp:</b> Luật Lâm nghiệp 2017; TT 29/2018/TT-BNNPTNT (biện pháp lâm sinh); FSC','<b>Thủy sản:</b> QCVN 02-19:2014/BNNPTNT; VietGAP TCVN 11892-1:2017','<b>Quốc tế:</b> ASC, GlobalG.A.P., Naturland'])],
+['7. Rủi ro chính',ul(['Bệnh tôm → giống PCR sạch, giữ nước tốt','Độ mặn/phèn biến động → điều tiết cống, bón vôi','Xói lở bờ → giữ băng rừng, gia cố bờ','Giá tôm biến động → đa dạng hóa, chứng nhận, hợp đồng bao tiêu'])],
+['8. Gợi ý lời trình bày (~2–3 phút)',ul(['Nêu chuẩn đầu ra trước, rồi nói quy trình được thiết kế ngược từ chuẩn đó.','Đi qua 6 giai đoạn, nhấn mạnh giống sạch và chu trình sinh thái.','Kết thúc bằng nghiệm thu: đo được, có chuẩn, có hồ sơ.'])]];
+let zoom=+(localStorage.getItem('ce_zoom')||100);
+function buildDocs(){
+  $('#docs-body').innerHTML=`<div class="card"><h3>Tiến độ dự án (mẫu)</h3><table>${timeline.map(([n,d],i)=>`<tr><td>${i+1}</td><td>${n}</td><td>${fmt(d)}</td><td>${i?'Phụ thuộc bước '+i:'—'}</td></tr>`).join('')}</table></div>
+  <h3>Quy trình kỹ thuật (mẫu, cần chuyên gia xác nhận)</h3>${procs.map(([t,b])=>`<details><summary>${t}</summary><p>${b}</p></details>`).join('')}
+  <div class="card"><h3>Thư viện tài liệu</h3><table><tr><th>Tài liệu</th><th>Nguồn</th><th>Mô tả</th><th></th></tr>
+  <tr><td>P2 – Quy trình kĩ thuật &amp; nghiệm thu (bản thuyết trình)</td><td>Tài liệu nội bộ của nhóm (chưa phải nghiên cứu đã công bố)</td><td>Bản rút gọn: chuẩn đầu ra, 6 giai đoạn, nghiệm thu, rủi ro.</td><td><button id="readP2">Đọc tài liệu</button></td></tr></table>
+  <p><small>Các nguồn khác chưa được xác minh nên chưa đưa vào. Thêm vào <code>referenceDocuments</code> khi đã kiểm chứng.</small></p></div>
+  <div class="card" id="reader" hidden><h3>P2 – Quy trình kĩ thuật &amp; nghiệm thu</h3>
+  <p class="note">Rút gọn từ bản chi tiết. Số liệu là khoảng tham khảo, cần đối chiếu nguồn trước khi trình bày.</p>
+  <div class="bar"><button id="zm">A−</button><span id="zv"></span><button id="zp">A+</button><button id="allo">Mở tất cả</button><button id="allc">Thu gọn tất cả</button><a href="P2-quy-trinh-nghiem-thu.docx" download>Tải file Word</a></div>
+  <div class="toc">${refDoc.map((d,i)=>`<a href="#p2-${i}" data-i="${i}">${d[0]}</a>`).join('')}</div>
+  <div id="rbody">${refDoc.map((d,i)=>`<details id="p2-${i}" open><summary>${d[0]}</summary>${d[1]}</details>`).join('')}</div></div>`;
+  const setZ=v=>{zoom=clamp(v,70,160);localStorage.setItem('ce_zoom',zoom);$('#rbody').style.fontSize=zoom+'%';$('#zv').textContent=zoom+'%'};
+  const all=o=>document.querySelectorAll('#rbody details').forEach(d=>d.open=o);
+  $('#readP2').onclick=()=>{$('#reader').hidden=false;$('#reader').scrollIntoView({behavior:'smooth'})};
+  $('#zm').onclick=()=>setZ(zoom-10);$('#zp').onclick=()=>setZ(zoom+10);$('#allo').onclick=()=>all(true);$('#allc').onclick=()=>all(false);
+  document.querySelectorAll('.toc a').forEach(a=>a.onclick=e=>{e.preventDefault();const d=$('#p2-'+a.dataset.i);d.open=true;d.scrollIntoView({behavior:'smooth'})});
+  setZ(zoom);}
 // ===== Controls =====
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.tab').forEach(e=>e.classList.remove('on'));b.classList.add('on');$('#'+b.dataset.tab).classList.add('on');draw()});
 $('#pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'Tiếp tục':'Tạm dừng';render()};
