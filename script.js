@@ -115,20 +115,26 @@ const refDoc2=[
 ['3.1 Chi phí đầu vào (ước tính cho 1 vụ)','<p class="note">Tính cho mô hình bán thâm canh / thâm canh vừa phải, quy mô chuẩn 1.000 m² ao nuôi, vụ nuôi khoảng 4–5 tháng.</p>'+tb(['Hạng mục','Cơ sở ước tính','Chi phí'],[['Tiền con giống','Mật độ thả khoảng 15–25 con/m² (thấp hơn nhiều so với tôm thẻ)','3–5 triệu VNĐ'],['Thức ăn công nghiệp','Nuôi 4–5 tháng, FCR dao động 1.3–1.5','50–65 triệu VNĐ'],['Vận hành &amp; xử lý','Điện, hóa chất cải tạo ao, men vi sinh, khoáng chất, nhiên liệu','15–20 triệu VNĐ'],['<b>Tổng chi phí ước tính</b>','Trên 1.000 m²','<b>68–90 triệu VNĐ</b>']])],
 ['3.2 Doanh thu ước tính',ul(['<b>Sản lượng thu hoạch:</b> Tỷ lệ sống ước tính 70% - 75%, đạt năng suất khoảng 600 - 800 kg tôm thương phẩm/1.000 m² (size cỡ lớn: 20 - 30 con/kg).','<b>Tổng doanh thu:</b> Với giá bán tôm sú cỡ lớn dao động khoảng 200.000 - 250.000 VNĐ/kg, tổng doanh thu đạt khoảng <b>130 - 180 triệu VNĐ</b>.'])],
 ['3.3 Hiệu quả tài chính',ul(['<b>Lợi nhuận ròng:</b> Lợi nhuận = Tổng doanh thu − Tổng chi phí = <b>60 - 90 triệu VNĐ/vụ/1.000 m²</b>','<b>Tỷ suất lợi nhuận trên vốn đầu tư:</b> Đạt khoảng <b>80% - 100% / vụ</b> (chi phí đầu tư vốn ban đầu thấp hơn tôm thẻ, nhưng thời gian nuôi kéo dài hơn 4–5 tháng/vụ).'])+'<p class="note">Đây là ước tính trong tài liệu của nhóm, không phải kết quả đo thực tế hay bằng chứng về hiệu quả kinh tế.</p>']];
-const DOCS=[{t:'Phần 1–3: Giới thiệu đề tài, giống nuôi, hạch toán',n:'Tài liệu nội bộ của nhóm (chưa phải nghiên cứu đã công bố). Các trích dẫn FAO (2023), VASEP và số liệu kinh tế do nhóm ghi, cần đối chiếu nguồn gốc trước khi trình bày.',f:'P1-gioi-thieu-de-tai-nuoi-tom.docx',s:refDoc2},
-{t:'P2: Quy trình kĩ thuật & nghiệm thu',n:'Tài liệu nội bộ của nhóm, rút gọn từ bản chi tiết (chưa phải nghiên cứu đã công bố). Số liệu là khoảng tham khảo, cần đối chiếu nguồn trước khi trình bày.',f:'P2-quy-trinh-nghiem-thu.docx',s:refDoc}];
-let cur=+(localStorage.getItem('ce_doc')||0)%2;
+const DOCS=[{t:'Phần 1–3: Giới thiệu đề tài, giống nuôi, hạch toán',n:'Tài liệu nội bộ của nhóm (chưa phải nghiên cứu đã công bố). Các trích dẫn FAO (2023), VASEP và số liệu kinh tế do nhóm ghi, cần đối chiếu nguồn gốc trước khi trình bày.',d:'Lý do môi trường và kinh tế, chọn giống, đối tượng nghiên cứu, hạch toán ước tính cho một vụ nuôi.',f:'P1-gioi-thieu-de-tai-nuoi-tom.docx',s:refDoc2},
+{t:'P2: Quy trình kĩ thuật & nghiệm thu',n:'Tài liệu nội bộ của nhóm, rút gọn từ bản chi tiết (chưa phải nghiên cứu đã công bố). Số liệu là khoảng tham khảo, cần đối chiếu nguồn trước khi trình bày.',d:'Chuẩn đầu ra, điều kiện áp dụng, quy trình 6 giai đoạn, nghiệm thu, tiêu chuẩn đối chiếu, rủi ro.',f:'P2-quy-trinh-nghiem-thu.docx',s:refDoc}];
+let cur=null; // null = màn hình danh sách tài liệu
 let zoom=+(localStorage.getItem('ce_zoom')||100);
 function buildDocs(){
-  const D=DOCS[cur];
-  $('#docs-body').innerHTML=`<div class="card"><div class="bar docsw">${DOCS.map((d,i)=>`<button data-d="${i}" class="${i==cur?'on':''}">${d.t}</button>`).join('')}</div>
+  if(cur===null){ // ----- Danh sách tài liệu -----
+    $('#docs-body').innerHTML=`<div class="card"><h2>Thư viện tài liệu</h2><p class="note">Chọn một tài liệu để đọc ngay trong trang. Các tài liệu dưới đây là tài liệu nội bộ của nhóm, chưa phải nghiên cứu đã công bố.</p>
+    <div class="doclist">${DOCS.map((d,i)=>`<div class="doc"><b>${d.t}</b><p>${d.d}</p><div class="bar"><button data-open="${i}">Đọc tài liệu</button><a href="${d.f}" download>Tải file Word</a></div></div>`).join('')}</div></div>`;
+    document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{cur=+b.dataset.open;buildDocs();window.scrollTo(0,0)});
+    return;}
+  const D=DOCS[cur]; // ----- Trình đọc -----
+  $('#docs-body').innerHTML=`<div class="card"><div class="bar"><button class="back2">← Quay lại danh sách tài liệu</button></div><h2>${D.t}</h2>
   <p class="note">${D.n}</p>
   <div class="bar"><button id="zm">A−</button><span id="zv"></span><button id="zp">A+</button><button id="allo">Mở tất cả</button><button id="allc">Thu gọn tất cả</button><a href="${D.f}" download>Tải file Word</a></div>
   <div class="toc">${D.s.map((d,i)=>`<a href="#p2-${i}" data-i="${i}">${d[0]}</a>`).join('')}</div>
-  <div id="rbody">${D.s.map((d,i)=>`<details id="p2-${i}" open><summary>${d[0]}</summary>${d[1]}</details>`).join('')}</div></div>`;
+  <div id="rbody">${D.s.map((d,i)=>`<details id="p2-${i}" open><summary>${d[0]}</summary>${d[1]}</details>`).join('')}</div>
+  <div class="bar"><button class="back2">← Quay lại danh sách tài liệu</button></div></div>`;
   const setZ=v=>{zoom=clamp(v,70,160);localStorage.setItem('ce_zoom',zoom);$('#rbody').style.fontSize=zoom+'%';$('#zv').textContent=zoom+'%'};
   const all=o=>document.querySelectorAll('#rbody details').forEach(d=>d.open=o);
-  document.querySelectorAll('.docsw button').forEach(b=>b.onclick=()=>{cur=+b.dataset.d;localStorage.setItem('ce_doc',cur);buildDocs()});
+  document.querySelectorAll('.back2').forEach(b=>b.onclick=()=>{cur=null;buildDocs();window.scrollTo(0,0)});
   $('#zm').onclick=()=>setZ(zoom-10);$('#zp').onclick=()=>setZ(zoom+10);$('#allo').onclick=()=>all(true);$('#allc').onclick=()=>all(false);
   document.querySelectorAll('.toc a').forEach(a=>a.onclick=e=>{e.preventDefault();const d=$('#p2-'+a.dataset.i);d.open=true;d.scrollIntoView({behavior:'smooth'})});
   setZ(zoom);}

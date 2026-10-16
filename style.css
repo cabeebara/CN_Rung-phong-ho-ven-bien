@@ -30,3 +30,6 @@ footer{font-size:12px;margin-top:16px;padding:10px;background:var(--l);border-ra
 #docs-body h2{margin:0 0 8px;font-size:20px}
 
 .docsw button{background:#fff!important;color:var(--d)!important;border:2px solid var(--m)!important}.docsw button.on{background:var(--m)!important;color:#fff!important}
+
+.doclist{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:10px}.doc{border:1px solid #dde6da;border-radius:10px;padding:14px;background:var(--bg)}.doc p{font-size:.9em;margin:6px 0}
+.bar button{background:var(--m);color:#fff}.back2{background:var(--d)!important}
